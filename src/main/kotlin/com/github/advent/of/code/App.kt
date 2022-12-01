@@ -12,14 +12,24 @@ class App : CliktCommand() {
     private val day by argument(help = "The number of the day you wish to execute").int().check("Value must be between 1 & 25") { it in 1..25 }
     private val part by argument(help = "The part of the day you wish to execute").int().check("Value must be 1 or 2") { it in 1..2 }
 
+    private val errorStyle = (TextStyles.bold + TextColors.brightRed)
+    private val promptStyle = (TextStyles.bold + TextStyles.underline + TextColors.brightBlue)
+    private val resultStyle = (TextStyles.bold + TextColors.brightMagenta)
+
+    private val terminal = Terminal()
+
     override fun run() {
         val input = InputFetcher.fetch(day)
-        val dayToExecute = DayFetcher.fetch(day)
+
+        val dayToExecute = try {
+            DayFetcher.fetch(day)
+        } catch (error: NoSuchElementException) {
+            terminal.println(errorStyle("Unable to find day #$day."))
+            return
+        }
+
         val result = dayToExecute.execute(part, input)
 
-        val terminal = Terminal()
-        val promptStyle = (TextStyles.bold + TextColors.brightBlue + TextStyles.underline)
-        val resultStyle = (TextStyles.bold + TextColors.brightMagenta)
         terminal.println("${promptStyle("The answer for day #$day part #$part is:")} ${resultStyle("$result")}")
     }
 }
