@@ -7,6 +7,7 @@ import com.github.ajalt.clikt.parameters.types.int
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextStyles
 import com.github.ajalt.mordant.terminal.Terminal
+import com.github.kittinunf.fuel.core.FuelError
 
 class App : CliktCommand() {
     private val day by argument(help = "The number of the day you wish to execute").int().check("Value must be between 1 & 25") { it in 1..25 }
@@ -19,7 +20,12 @@ class App : CliktCommand() {
     private val terminal = Terminal()
 
     override fun run() {
-        val input = InputFetcher.fetch(day)
+        val input = try {
+            InputFetcher.fetch(day)
+        } catch (error: FuelError) {
+            terminal.println(errorStyle("Unable to fetch input for day #$day."))
+            return
+        }
 
         val dayToExecute = try {
             DayFetcher.fetch(day)

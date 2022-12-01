@@ -2,6 +2,7 @@ package com.github.advent.of.code
 
 import com.github.kittinunf.fuel.core.Headers
 import com.github.kittinunf.fuel.httpGet
+import com.github.kittinunf.result.Result
 import java.io.File
 
 object InputFetcher {
@@ -13,6 +14,13 @@ object InputFetcher {
             .header(Headers.COOKIE to "session=$cookies")
             .responseString()
 
-        return result.get().trim()
+        when (result) {
+            is Result.Failure -> {
+                throw result.getException()
+            }
+            is Result.Success -> {
+                return result.get().trim()
+            }
+        }
     }
 }
