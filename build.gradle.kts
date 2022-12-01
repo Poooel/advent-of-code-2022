@@ -37,7 +37,6 @@ configure<SpotlessExtension> {
 
         trimTrailingWhitespace()
         indentWithSpaces()
-        indentWithTabs()
         endWithNewline()
     }
     kotlin {
