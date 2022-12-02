@@ -38,7 +38,7 @@ class Day02RockPaperScissors : Executable {
 
         return rounds.sumOf { round ->
             val (opponent, you) = round.split(' ')
-            
+
             val score = when (you) {
                 "X" -> 0
                 "Y" -> 3
@@ -46,7 +46,7 @@ class Day02RockPaperScissors : Executable {
                 else -> 0
             }
 
-            val outcomeScore = when(you) {
+            val outcomeScore = when (you) {
                 "X" -> {
                     when (opponent) {
                         "A" -> 3 // Z
