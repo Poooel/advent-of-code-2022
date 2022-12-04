@@ -20,7 +20,7 @@ dependencies {
     implementation("com.github.kittinunf.fuel:fuel:2.3.1")
     implementation("org.reflections:reflections:0.10.2")
     implementation("org.slf4j:slf4j-api:2.0.5")
-    implementation("org.slf4j:slf4j-simple:2.0.5")
+    implementation("org.slf4j:slf4j-nop:2.0.5")
 }
 
 tasks.withType<KotlinCompile> {
