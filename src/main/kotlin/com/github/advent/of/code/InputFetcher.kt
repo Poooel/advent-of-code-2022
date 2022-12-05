@@ -19,7 +19,7 @@ object InputFetcher {
                 throw result.getException()
             }
             is Result.Success -> {
-                return result.get().trim()
+                return result.get().trimEnd()
             }
         }
     }
