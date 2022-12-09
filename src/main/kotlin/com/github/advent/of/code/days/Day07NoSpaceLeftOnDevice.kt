@@ -37,7 +37,7 @@ class Day07NoSpaceLeftOnDevice : Executable {
 
         terminalOutput.forEach { terminalLine ->
             if (terminalLine.startsWith('$')) {
-                val (prefix, command) = terminalLine.split(' ')
+                val (_, command) = terminalLine.split(' ')
 
                 if (command == "cd") { // Change directory
                     val argument = terminalLine.split(' ').last()
