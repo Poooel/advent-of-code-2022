@@ -79,53 +79,53 @@ class Day07NoSpaceLeftOnDevice : Executable {
 
         return directories
     }
-}
 
-private fun String.isNumber(): Boolean {
-    return this.all { it.isDigit() }
-}
-
-private data class Directory(
-    val name: String,
-    val subDirectories: MutableList<Directory> = mutableListOf(),
-    val files: MutableList<File> = mutableListOf(),
-    private val parent: Directory?
-) {
-    fun addDirectory(name: String) {
-        subDirectories.add(
-            Directory(name = name, parent = this)
-        )
+    private fun String.isNumber(): Boolean {
+        return this.all { it.isDigit() }
     }
 
-    fun addFile(name: String, size: Long) {
-        files.add(
-            File(name, size)
-        )
-    }
+    private data class Directory(
+        val name: String,
+        val subDirectories: MutableList<Directory> = mutableListOf(),
+        val files: MutableList<File> = mutableListOf(),
+        private val parent: Directory?
+    ) {
+        fun addDirectory(name: String) {
+            subDirectories.add(
+                Directory(name = name, parent = this)
+            )
+        }
 
-    fun getDirectory(name: String): Directory {
-        return subDirectories.first { it.name == name }
-    }
+        fun addFile(name: String, size: Long) {
+            files.add(
+                File(name, size)
+            )
+        }
 
-    fun getParent(): Directory {
-        if (name == "/") {
-            throw Error("Root directory has no parent directory.")
-        } else {
-            return parent!!
+        fun getDirectory(name: String): Directory {
+            return subDirectories.first { it.name == name }
+        }
+
+        fun getParent(): Directory {
+            if (name == "/") {
+                throw Error("Root directory has no parent directory.")
+            } else {
+                return parent!!
+            }
+        }
+
+        fun size(): Long {
+            var count = 0L
+
+            count += subDirectories.sumOf { it.size() }
+            count += files.sumOf { it.size }
+
+            return count
         }
     }
 
-    fun size(): Long {
-        var count = 0L
-
-        count += subDirectories.sumOf { it.size() }
-        count += files.sumOf { it.size }
-
-        return count
-    }
+    private data class File(
+        val name: String,
+        val size: Long
+    )
 }
-
-private data class File(
-    val name: String,
-    val size: Long
-)

@@ -63,9 +63,9 @@ class Day10CathodeRayTube : Executable {
             crt[Math.floorDiv(pixelToDraw, 40)][pixelToDraw % 40] = '.'
         }
     }
-}
 
-private fun Int.closeTo(target: Int, error: Int): Boolean {
-    val targetRange = this - error..this + error
-    return target in targetRange
+    private fun Int.closeTo(target: Int, error: Int): Boolean {
+        val targetRange = this - error..this + error
+        return target in targetRange
+    }
 }

@@ -78,29 +78,29 @@ class Day09RopeBridge : Executable {
 
         return pointsVisitedByTail.size
     }
-}
 
-private data class Point(
-    val x: Double,
-    val y: Double
-) {
-    fun distanceTo(other: Point): Double {
-        return sqrt((other.x - this.x).pow(2) + (other.y - this.y).pow(2))
-    }
+    private data class Point(
+        val x: Double,
+        val y: Double
+    ) {
+        fun distanceTo(other: Point): Double {
+            return sqrt((other.x - this.x).pow(2) + (other.y - this.y).pow(2))
+        }
 
-    fun up(): Point {
-        return Point(x, y + 1)
-    }
+        fun up(): Point {
+            return Point(x, y + 1)
+        }
 
-    fun right(): Point {
-        return Point(x + 1, y)
-    }
+        fun right(): Point {
+            return Point(x + 1, y)
+        }
 
-    fun down(): Point {
-        return Point(x, y - 1)
-    }
+        fun down(): Point {
+            return Point(x, y - 1)
+        }
 
-    fun left(): Point {
-        return Point(x - 1, y)
+        fun left(): Point {
+            return Point(x - 1, y)
+        }
     }
 }

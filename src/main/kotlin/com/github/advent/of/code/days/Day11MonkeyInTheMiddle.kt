@@ -83,15 +83,15 @@ class Day11MonkeyInTheMiddle : Executable {
 
         return monkeys
     }
-}
 
-private operator fun <E> List<E>.component6(): E {
-    return get(5)
-}
+    private operator fun <E> List<E>.component6(): E {
+        return get(5)
+    }
 
-private data class Monkey(
-    val items: MutableList<Long>,
-    val operation: (Long) -> Long,
-    val test: (Long) -> Int,
-    var inspectedItems: Long = 0
-)
+    private data class Monkey(
+        val items: MutableList<Long>,
+        val operation: (Long) -> Long,
+        val test: (Long) -> Int,
+        var inspectedItems: Long = 0
+    )
+}
